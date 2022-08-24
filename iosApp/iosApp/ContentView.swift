@@ -1,40 +1,31 @@
 import SwiftUI
-import shared
+import KBeaconScanner
 
 struct ContentView: View {
-    @StateObject var text = ViewModel()
-    
-	var body: some View {
-        Text(text.text)
-    
-	}
-}
+    @ObservedObject private(set) var viewModel: ViewModel
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+    var body: some View {
+        Text(viewModel.text)
+    }
 }
 
 extension ContentView {
     class ViewModel: ObservableObject {
         @Published var text = "Loading..."
+        var test = Platform().platform
+        var scanner = NMScanner()
+
         
         init() {
-            
-            Greeting().greetingSuspend { text, error in
-                DispatchQueue.main.async {
-                    self.text = text ?? "No Text"
-                }
-            }
-            
-            
-            // Greeting().greetingObservable { cflow, error in
-            //    cflow?.watch(block: { text in
-            //        self.text = (text ?? "Loading...") as String
-            //    })
-            
+            scanner.start()
+            scanner.observeResults().watch(block: {scanResult in
+                print("ScanResult \(scanResult?.description ?? "empty")")
+            })
+
+            /*Greeting().helloFromStateFlow().watch(block: { text in
+                self.text = (text ?? "") as String
+            })*/
         }
+         
     }
 }
-

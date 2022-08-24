@@ -25,10 +25,26 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>UILaunchScreen</key>
+	<dict/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>Collect user outdoor position</string>
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>Collect user outdoor position</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Collect user outdoor position</string>
+        <key>UIBackgroundModes</key>
+        <array>
+            <string>bluetooth-central</string>
+            <string>bluetooth-peripheral</string>
+            <string>fetch</string>
+            <string>location</string>
+            <string>processing</string>
+        </array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -42,7 +58,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UILaunchScreen</key>
-	<dict/>
 </dict>
 </plist>

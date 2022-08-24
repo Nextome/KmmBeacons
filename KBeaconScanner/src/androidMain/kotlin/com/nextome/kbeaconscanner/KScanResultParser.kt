@@ -8,6 +8,8 @@ object KScanResultParser {
         major = this.id2.toInt(),
         minor = this.id3.toInt(),
         rssi = this.rssi.toDouble(),
-        txPower = this.txPower
+        txPower = this.txPower,
+        accuracy = 0.0,
+        proximity = KScanProximity.UNKNOWN
     )
 }

@@ -1,16 +1,16 @@
 PODS:
-  - shared (1.0)
+  - KBeaconScanner (1.0)
 
 DEPENDENCIES:
-  - shared (from `../shared`)
+  - KBeaconScanner (from `../KBeaconScanner`)
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  KBeaconScanner:
+    :path: "../KBeaconScanner"
 
 SPEC CHECKSUMS:
-  shared: 07cac7993e4f05eda6b76f3a213b070947c3b79f
+  KBeaconScanner: b9193568710c4b5bfbcb863ce113281062f63096
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: 0a0cd21c804e1f9e0f4671550ec8144b87fe6c81
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
