@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'KBeaconScanner'
-    spec.version                  = '1.0'
+    spec.version                  = '1.0.1'
     spec.homepage                 = 'Link to the Shared Module homepage'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
