@@ -5,6 +5,9 @@ import com.nextome.kbeaconscanner.KScanResultParser.asKScanResult
 import com.nextome.kbeaconscanner.utils.CFlow
 import com.nextome.kbeaconscanner.utils.wrap
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.BeaconParser
 import org.altbeacon.beacon.Region
@@ -20,14 +23,16 @@ actual class KBeaconScanner{
         beaconParsers.add(BeaconParser().setBeaconLayout(BEACON_LAYOUT_IBEACON))
     }
 
-    init {
+    private val _errorObservable = MutableStateFlow<Exception?>(null)
 
+    init {
         setScanPeriod(DEFAULT_PERIOD_SCAN)
         setBetweenScanPeriod(DEFAULT_PERIOD_BETWEEEN_SCAN)
     }
 
     actual fun start() {
         with (beaconManager) {
+            stopRangingBeacons(rangingRegion)
             removeAllRangeNotifiers()
 
             addRangeNotifier { beacons, _ ->
@@ -42,8 +47,6 @@ actual class KBeaconScanner{
 
             startRangingBeacons(rangingRegion)
         }
-
-        beaconManager.startRangingBeacons(rangingRegion)
     }
 
     actual fun observeResults(): CFlow<List<KScanResult>> = scannerFlow.wrap()
@@ -71,7 +74,7 @@ actual class KBeaconScanner{
     }
 
     actual fun observeErrors(): CFlow<Exception> {
-        TODO("Not yet implemented")
+        return _errorObservable.asStateFlow().filterNotNull().wrap()
     }
 
     actual companion object Factory {
