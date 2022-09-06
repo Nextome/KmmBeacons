@@ -8,7 +8,8 @@ data class KScanResult(
     val major: Int,
     val txPower: Int,
     val accuracy: Double?,
-    val proximity: KScanProximity
+    val proximity: KScanProximity,
+    var rawBytes: Array<Byte> = arrayOf()
 )
 
 
