@@ -1,13 +1,13 @@
 package com.nextome.kbeaconscanner
 
 import android.content.Context
+import android.util.Log
 import com.nextome.kbeaconscanner.KScanResultParser.asKScanResult
 import com.nextome.kbeaconscanner.utils.CFlow
 import com.nextome.kbeaconscanner.utils.wrap
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.BeaconParser
 import org.altbeacon.beacon.Region
@@ -15,7 +15,10 @@ import org.altbeacon.beacon.Region
 actual class KBeaconScanner{
     private var regionUUID = DEFAULT_REGION_UUID
 
-    private val scannerFlow = MutableStateFlow(listOf<KScanResult>())
+    private val scannerFlow = MutableSharedFlow<List<KScanResult>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     private val rangingRegion = Region(regionUUID, null, null, null)
 
@@ -36,13 +39,10 @@ actual class KBeaconScanner{
             removeAllRangeNotifiers()
 
             addRangeNotifier { beacons, _ ->
-                if (beacons.isNotEmpty()) {
-                    scannerFlow.tryEmit(
-                        beacons
-                            .filterNotNull()
-                            .map { it.asKScanResult() }
-                    )
-                }
+                scannerFlow.tryEmit(
+                    beacons
+                        .filterNotNull()
+                        .map { it.asKScanResult() })
             }
 
             startRangingBeacons(rangingRegion)

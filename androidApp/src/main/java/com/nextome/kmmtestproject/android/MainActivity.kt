@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             scanner.observeResults().collect{
+                Log.e("test", "Found ${it.size} beacons")
+
                 it.forEach {
                     Log.e("test", "Found ${it.uuid}, ${it.major}, ${it.minor}")
                 }

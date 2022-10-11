@@ -1,7 +1,12 @@
 package com.nextome.kbeaconscanner.utils
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
 
 fun <T> Flow<T>.wrap(): CFlow<T> = CFlow(this)
 
