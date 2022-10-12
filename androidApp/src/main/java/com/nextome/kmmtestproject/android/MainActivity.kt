@@ -3,7 +3,7 @@ package com.nextome.kmmtestproject.android
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.nextome.kbeaconscanner.KBeaconScanner
+import com.nextome.kbeaconscanner.KmmBeacons
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -13,13 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        KBeaconScanner.init(application)
-
-        val scanner = KBeaconScanner()
-        scanner.start()
+        val kmmBeacons = KmmBeacons(application)
 
         GlobalScope.launch {
-            scanner.observeResults().collect{
+            kmmBeacons.observeResults().collect{
                 Log.e("test", "Found ${it.size} beacons")
 
                 it.forEach {

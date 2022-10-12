@@ -1,5 +1,5 @@
 PODS:
-  - KBeaconScanner (1.0)
+  - KBeaconScanner (0.0.1)
 
 DEPENDENCIES:
   - KBeaconScanner (from `../KBeaconScanner`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../KBeaconScanner"
 
 SPEC CHECKSUMS:
-  KBeaconScanner: b9193568710c4b5bfbcb863ce113281062f63096
+  KBeaconScanner: ebc8c03b61d82256374e3ff62c35b3886f380691
 
 PODFILE CHECKSUM: 0a0cd21c804e1f9e0f4671550ec8144b87fe6c81
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

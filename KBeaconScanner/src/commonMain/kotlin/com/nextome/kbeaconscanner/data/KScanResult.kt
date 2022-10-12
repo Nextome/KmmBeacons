@@ -1,4 +1,4 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kbeaconscanner.data
 
 
 data class KScanResult(

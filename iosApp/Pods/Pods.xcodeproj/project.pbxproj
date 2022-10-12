@@ -9,9 +9,9 @@
 /* Begin PBXAggregateTarget section */
 		AA25BA545B4D70810776416EC61FC7D4 /* KBeaconScanner */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = FF01DB5FE12D83ED4F4D7BB115ACD29D /* Build configuration list for PBXAggregateTarget "KBeaconScanner" */;
+			buildConfigurationList = 40C94259E80EC500173E9C5B86A5F0AE /* Build configuration list for PBXAggregateTarget "KBeaconScanner" */;
 			buildPhases = (
-				33B25BABEE883708DBABDC3F5DA5C181 /* [CP-User] Build KBeaconScanner */,
+				2CD4522B215E87F6E6F8F5B0E7A94E5D /* [CP-User] Build KBeaconScanner */,
 			);
 			dependencies = (
 			);
@@ -241,7 +241,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		33B25BABEE883708DBABDC3F5DA5C181 /* [CP-User] Build KBeaconScanner */ = {
+		2CD4522B215E87F6E6F8F5B0E7A94E5D /* [CP-User] Build KBeaconScanner */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,7 +249,7 @@
 			name = "[CP-User] Build KBeaconScanner";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "                if [ \"YES\" = \"$COCOAPODS_SKIP_KOTLIN_BUILD\" ]; then\n                  echo \"Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
+			shellScript = "                if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n                  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -274,6 +274,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		340F050E156DFF50B019FD9D4FD28213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38AB56EDBF3DD4CD198784BB29E849FC /* KBeaconScanner.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		57551831CEA6B727FBBCF6B68B9B6985 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A79C2AA5C063914B2D1BD80187FDF6DE /* Pods-iosApp.debug.xcconfig */;
@@ -373,24 +391,6 @@
 			};
 			name = Release;
 		};
-		5B4608503121AD0602C7A02D60B4B74C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38AB56EDBF3DD4CD198784BB29E849FC /* KBeaconScanner.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		84BC8CF02D6896CE2FA9069AD14B1F36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A2FB55B5C37861BC78ECD1420D818C3 /* Pods-iosApp.release.xcconfig */;
@@ -428,6 +428,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		88AA2414BEF52A214825608094D0D1CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45A9DC8681F5D307FF9A7943E9760A62 /* KBeaconScanner.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		A0374B8CF9A7D6A45F6D116D698D1C19 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -495,23 +512,6 @@
 			};
 			name = Debug;
 		};
-		D6647C8FA32161310601419C69D83B46 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45A9DC8681F5D307FF9A7943E9760A62 /* KBeaconScanner.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -524,20 +524,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		40C94259E80EC500173E9C5B86A5F0AE /* Build configuration list for PBXAggregateTarget "KBeaconScanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88AA2414BEF52A214825608094D0D1CA /* Debug */,
+				340F050E156DFF50B019FD9D4FD28213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A0374B8CF9A7D6A45F6D116D698D1C19 /* Debug */,
 				593F10BFFA94DAC7D6E17FB8A7F32D72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FF01DB5FE12D83ED4F4D7BB115ACD29D /* Build configuration list for PBXAggregateTarget "KBeaconScanner" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6647C8FA32161310601419C69D83B46 /* Debug */,
-				5B4608503121AD0602C7A02D60B4B74C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,8 +1,9 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kbeaconscanner.data
 
+import com.nextome.kbeaconscanner.data.KScanProximity
 import platform.CoreLocation.CLProximity
 
-fun CLProximity.asKScanProximity(): KScanProximity{
+fun CLProximity.asKScanProximity(): KScanProximity {
    return when(this){
         CLProximity.CLProximityFar -> KScanProximity.FAR
         CLProximity.CLProximityImmediate -> KScanProximity.IMMEDIATE

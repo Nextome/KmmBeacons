@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8777C9F6889E59EFFD631D80AEE9048B"
-               BuildableName = "shared"
-               BlueprintName = "shared"
+               BlueprintIdentifier = "AA25BA545B4D70810776416EC61FC7D4"
+               BuildableName = "KBeaconScanner"
+               BlueprintName = "KBeaconScanner"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

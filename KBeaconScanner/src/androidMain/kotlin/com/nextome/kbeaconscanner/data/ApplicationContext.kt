@@ -1,4 +1,4 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kbeaconscanner.data
 
 import android.app.Application
 

@@ -12,9 +12,7 @@ struct ContentView: View {
 extension ContentView {
     class ViewModel: ObservableObject {
         @Published var text = "Loading..."
-        var test = Platform().platform
-        var scanner = NMScanner()
-
+        var scanner = KmmBeacons()
         
         init() {
             scanner.start()

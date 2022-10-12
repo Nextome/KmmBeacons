@@ -1,16 +1,20 @@
 package com.nextome.kbeaconscanner
 
-import co.touchlab.kermit.Logger
-import com.nextome.kbeaconscanner.utils.CFlow
+import com.nextome.kbeaconscanner.data.ApplicationContext
+import com.nextome.kbeaconscanner.data.KScanResult
+import com.nextome.kbeaconscanner.data.asKScanProximity
 import com.nextome.kbeaconscanner.utils.wrap
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.callbackFlow
 import platform.CoreLocation.*
 import platform.Foundation.NSError
 import platform.Foundation.NSUUID
 import platform.darwin.NSObject
 
-actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerDelegateProtocol{
+internal actual class KmmScanner actual constructor(): NSObject(), CLLocationManagerDelegateProtocol{
     private val locationManager: CLLocationManager = CLLocationManager()
     private val regionList = listOf(
         CLBeaconRegion(
@@ -36,10 +40,6 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
             identifier = "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"),
     )
 
-    private val result = MutableSharedFlow<List<KScanResult>>(
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
-    )
     private val error = MutableSharedFlow<Exception>(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
@@ -51,95 +51,89 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
     private val DENIED = 2
     private val AUTHORIZED_ALWAYS = 3
     private val AUTHORIZED_WHEN_IN_USE = 4
-
-
     init {
-        locationManager.delegate = this
         locationManager.allowsBackgroundLocationUpdates = true
-    }
-
-
-    override fun locationManagerDidChangeAuthorization(manager: CLLocationManager) {
-        Logger.d(tag = TAG){"locationManagerDidChangeAuthorization"}
-        startRegionOrAskPermissions()
     }
 
     private fun startRegionOrAskPermissions(){
         when (locationManager.authorizationStatus){
             NOT_DETERMINED -> locationManager.requestWhenInUseAuthorization()
             AUTHORIZED_WHEN_IN_USE, AUTHORIZED_ALWAYS -> startRangingForRegions()
-            DENIED, RESTRICTED -> error.tryEmit(Exception("Localization permission denied"))
+            DENIED, RESTRICTED -> throw Exception("Localization permission denied")
             else -> locationManager.requestLocation()
         }
     }
     private fun startRangingForRegions(){
-        Logger.d(tag = TAG) { "startRangingForRegions"}
         regionList.forEach {
             locationManager.startRangingBeaconsInRegion(it)
         }
     }
 
-    override fun locationManager(
-        manager: CLLocationManager,
-        didRangeBeacons: List<*>,
-        inRegion: CLBeaconRegion
-    ) {
-        val rangedBeacons = didRangeBeacons.map { it as CLBeacon }
-        val resultBeacons = rangedBeacons.filter { it.accuracy >= 0 }.map {
-            KScanResult(
-                it.UUID.UUIDString,
-                it.rssi.toDouble(),
-                it.minor.intValue,
-                it.major.intValue,
-                0,
-                it.accuracy,
-                it.proximity.asKScanProximity()
-            )
+    actual fun observeResults() = callbackFlow {
+        startScan()
+
+        val delegate = object : NSObject(), CLLocationManagerDelegateProtocol{
+            override fun locationManager(
+                manager: CLLocationManager,
+                didRangeBeacons: List<*>,
+                satisfyingConstraint: CLBeaconIdentityConstraint
+            ) {
+                super.locationManager(manager, didRangeBeacons, satisfyingConstraint)
+
+                val rangedBeacons = didRangeBeacons.map { it as CLBeacon }
+                val resultBeacons = rangedBeacons.filter { it.accuracy >= 0 }.map {
+                    KScanResult(
+                        it.UUID.UUIDString,
+                        it.rssi.toDouble(),
+                        it.minor.intValue,
+                        it.major.intValue,
+                        0,
+                        it.accuracy,
+                        it.proximity.asKScanProximity()
+                    )
+                }
+
+                trySend(resultBeacons)
+            }
+
+            override fun locationManager(
+                manager: CLLocationManager,
+                rangingBeaconsDidFailForRegion: CLBeaconRegion,
+                withError: NSError
+            ) {
+                cancel(withError.localizedDescription, Exception(withError.localizedDescription))
+            }
+
+            override fun locationManagerDidChangeAuthorization(manager: CLLocationManager) {
+                startRegionOrAskPermissions()
+            }
         }
 
-        result.tryEmit(resultBeacons)
-    }
-
-    override fun locationManager(
-        manager: CLLocationManager,
-        rangingBeaconsDidFailForRegion: CLBeaconRegion,
-        withError: NSError
-    ) {
-        Logger.e(tag = TAG) { "BleScanner Exception -> ${withError.localizedDescription}" }
-        error.tryEmit(Exception("Scan failed with: ${withError.localizedDescription}"))
-    }
+        locationManager.delegate = delegate
+        awaitClose { stopScan() }
+    }.wrap()
 
     actual fun setScanPeriod(scanPeriod: Long) {
-       //NOT IMPLEMENTED
+        //NOT IMPLEMENTED
     }
 
     actual fun setBetweenScanPeriod(betweenScanPeriod: Long) {
         //NOT IMPLEMENTED
     }
 
-    actual fun start() {
+    private fun startScan() {
         startRegionOrAskPermissions()
     }
 
-    actual fun observeResults(): CFlow<List<KScanResult>> {
-        return result.wrap()
-    }
-
-    actual fun stop() {
+    private fun stopScan() {
         locationManager.rangedRegions.forEach {
             (it as? CLBeaconRegion)?.let { region ->
                 locationManager.stopRangingBeaconsInRegion(region)
             }
         }
     }
-
-    actual fun observeErrors(): CFlow<Exception> {
-        return error.wrap()
-    }
-
     actual companion object Factory {
         actual fun init(context: ApplicationContext) = Unit
     }
-
 }
 

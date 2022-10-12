@@ -17,7 +17,7 @@ allprojects {
     }
 
     group = "com.nextome.kbeaconscanner"
-    version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: "development"
+    version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: "0.0.1"
 }
 
 tasks.register("clean", Delete::class) {
