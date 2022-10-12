@@ -1,11 +1,10 @@
 package com.nextome.kbeaconscanner
 
 import co.touchlab.kermit.Logger
-import com.nextome.kbeaconscanner.KScanResult
 import com.nextome.kbeaconscanner.utils.CFlow
 import com.nextome.kbeaconscanner.utils.wrap
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import platform.CoreLocation.*
 import platform.Foundation.NSError
 import platform.Foundation.NSUUID
@@ -35,22 +34,28 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
         CLBeaconRegion(
             uUID = NSUUID("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"),
             identifier = "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"),
-
     )
-    private val result = MutableStateFlow(listOf<KScanResult>())
-    private val error = MutableSharedFlow<Exception>()
-    val TAG = "KBeaconScanner"
-    val NOT_DETERMINED = 0
-    val RESTRICTED = 1
-    val DENIED = 2
-    val AUTHORIZED_ALWAYS = 3
-    val AUTHORIZED_WHEN_IN_USE = 4
+
+    private val result = MutableSharedFlow<List<KScanResult>>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+    private val error = MutableSharedFlow<Exception>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+
+    private val TAG = "KBeaconScanner"
+    private val NOT_DETERMINED = 0
+    private val RESTRICTED = 1
+    private val DENIED = 2
+    private val AUTHORIZED_ALWAYS = 3
+    private val AUTHORIZED_WHEN_IN_USE = 4
 
 
     init {
         locationManager.delegate = this
         locationManager.allowsBackgroundLocationUpdates = true
-
     }
 
 
@@ -91,7 +96,8 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
                 it.proximity.asKScanProximity()
             )
         }
-        result.value = resultBeacons
+
+        result.tryEmit(resultBeacons)
     }
 
     override fun locationManager(
@@ -119,7 +125,6 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
         return result.wrap()
     }
 
-
     actual fun stop() {
         locationManager.rangedRegions.forEach {
             (it as? CLBeaconRegion)?.let { region ->
@@ -133,8 +138,7 @@ actual class KBeaconScanner actual constructor(): NSObject(), CLLocationManagerD
     }
 
     actual companion object Factory {
-        actual fun init(context: ApplicationContext) {
-        }
+        actual fun init(context: ApplicationContext) = Unit
     }
 
 }

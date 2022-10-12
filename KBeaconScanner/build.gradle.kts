@@ -3,11 +3,8 @@ plugins {
     kotlin("native.cocoapods")
     id("maven-publish")
     id("com.android.library")
-    id("com.jfrog.artifactory") version "4.29.0"
-    id("org.jetbrains.dokka") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.20"
 }
-group = "com.annalabellarte.testScan"
-version = "1.0.1"
 
 kotlin {
 
@@ -16,7 +13,8 @@ kotlin {
     iosSimulatorArm64()
 
     android {
-        publishLibraryVariants("release", "debug")
+        publishLibraryVariants("release")
+        publishLibraryVariantsGroupedByFlavor = true
     }
 
     cocoapods {
@@ -132,21 +130,14 @@ publishing{
     }
 }
 
-artifactory{
-    setContextUrl("https://annalabellarte.jfrog.io/artifactory")
-    publish{
-        setContextUrl("https://annalabellarte.jfrog.io/artifactory")
-        repository {
-            setRepoKey("playground")
-            setUsername("labe.anna97@gmail.com")
-            setPassword("15-rK9mTiGvX")
-            setMavenCompatible(true)
+System.getenv("GITHUB_REPOSITORY")?.let {
+    publishing {
+        repositories {
+            maven {
+                name = "github"
+                url = uri("https://maven.pkg.github.com/$it")
+                credentials(PasswordCredentials::class)
+            }
         }
-
-        defaults {
-            publications("mavenKotlin", "mavenAndroid",
-                "mavenAndroidDebug", "mavenIosx86", "mavenIosSimulatorArm64", "mavenIosArm64")
-        }
-
     }
 }

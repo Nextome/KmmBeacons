@@ -16,7 +16,7 @@ actual class KBeaconScanner{
     private var regionUUID = DEFAULT_REGION_UUID
 
     private val scannerFlow = MutableSharedFlow<List<KScanResult>>(
-        replay = 1,
+        extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
 
@@ -26,7 +26,10 @@ actual class KBeaconScanner{
         beaconParsers.add(BeaconParser().setBeaconLayout(BEACON_LAYOUT_IBEACON))
     }
 
-    private val _errorObservable = MutableStateFlow<Exception?>(null)
+    private val _errorObservable = MutableSharedFlow<Exception>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     init {
         setScanPeriod(DEFAULT_PERIOD_SCAN)
@@ -74,7 +77,7 @@ actual class KBeaconScanner{
     }
 
     actual fun observeErrors(): CFlow<Exception> {
-        return _errorObservable.asStateFlow().filterNotNull().wrap()
+        return _errorObservable.wrap()
     }
 
     actual companion object Factory {
