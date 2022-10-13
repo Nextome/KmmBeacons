@@ -1,8 +1,8 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kmmbeacons
 
-import com.nextome.kbeaconscanner.data.ApplicationContext
-import com.nextome.kbeaconscanner.data.KScanResult
-import com.nextome.kbeaconscanner.utils.CFlow
+import com.nextome.kmmbeacons.data.ApplicationContext
+import com.nextome.kmmbeacons.data.KScanResult
+import com.nextome.kmmbeacons.utils.CFlow
 
 const val DEFAULT_PERIOD_SCAN = 1000L
 const val DEFAULT_PERIOD_BETWEEEN_SCAN = 250L

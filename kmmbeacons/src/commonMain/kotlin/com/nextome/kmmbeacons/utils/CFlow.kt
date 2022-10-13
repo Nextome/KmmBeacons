@@ -1,4 +1,4 @@
-package com.nextome.kbeaconscanner.utils
+package com.nextome.kmmbeacons.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

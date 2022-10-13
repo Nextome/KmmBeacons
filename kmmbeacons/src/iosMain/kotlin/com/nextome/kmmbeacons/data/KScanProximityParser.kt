@@ -1,6 +1,5 @@
-package com.nextome.kbeaconscanner.data
+package com.nextome.kmmbeacons.data
 
-import com.nextome.kbeaconscanner.data.KScanProximity
 import platform.CoreLocation.CLProximity
 
 fun CLProximity.asKScanProximity(): KScanProximity {

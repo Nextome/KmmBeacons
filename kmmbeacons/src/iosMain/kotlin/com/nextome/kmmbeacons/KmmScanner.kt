@@ -1,9 +1,9 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kmmbeacons
 
-import com.nextome.kbeaconscanner.data.ApplicationContext
-import com.nextome.kbeaconscanner.data.KScanResult
-import com.nextome.kbeaconscanner.data.asKScanProximity
-import com.nextome.kbeaconscanner.utils.wrap
+import com.nextome.kmmbeacons.data.ApplicationContext
+import com.nextome.kmmbeacons.data.KScanResult
+import com.nextome.kmmbeacons.data.asKScanProximity
+import com.nextome.kmmbeacons.utils.wrap
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.awaitClose
@@ -40,17 +40,12 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
             identifier = "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"),
     )
 
-    private val error = MutableSharedFlow<Exception>(
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
-    )
-
-    private val TAG = "KBeaconScanner"
     private val NOT_DETERMINED = 0
     private val RESTRICTED = 1
     private val DENIED = 2
     private val AUTHORIZED_ALWAYS = 3
     private val AUTHORIZED_WHEN_IN_USE = 4
+
     init {
         locationManager.allowsBackgroundLocationUpdates = true
     }
@@ -70,8 +65,6 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
     }
 
     actual fun observeResults() = callbackFlow {
-        startScan()
-
         val delegate = object : NSObject(), CLLocationManagerDelegateProtocol{
             override fun locationManager(
                 manager: CLLocationManager,
@@ -108,7 +101,11 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
         }
 
         locationManager.delegate = delegate
-        awaitClose { stopScan() }
+        startScan()
+        awaitClose {
+            stopScan()
+            locationManager.delegate = null
+        }
     }.wrap()
 
     actual fun setScanPeriod(scanPeriod: Long) {

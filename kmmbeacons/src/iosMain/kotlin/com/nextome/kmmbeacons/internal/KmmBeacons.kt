@@ -1,5 +1,5 @@
-package com.nextome.kbeaconscanner.internal
+package com.nextome.kmmbeacons.internal
 
-import com.nextome.kbeaconscanner.KmmBeaconsBase
+import com.nextome.kmmbeacons.KmmBeaconsBase
 
 class KmmBeacons: KmmBeaconsBase(null)

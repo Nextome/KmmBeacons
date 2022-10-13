@@ -1,4 +1,4 @@
-package com.nextome.kbeaconscanner.data
+package com.nextome.kmmbeacons.data
 
 import platform.UIKit.UIView
 

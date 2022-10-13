@@ -1,7 +1,7 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kmmbeacons
 
-import com.nextome.kbeaconscanner.data.KScanProximity
-import com.nextome.kbeaconscanner.data.KScanResult
+import com.nextome.kmmbeacons.data.KScanProximity
+import com.nextome.kmmbeacons.data.KScanResult
 import org.altbeacon.beacon.Beacon
 
 object KScanResultParser {

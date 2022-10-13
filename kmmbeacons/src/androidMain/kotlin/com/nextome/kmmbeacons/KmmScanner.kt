@@ -1,11 +1,11 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kmmbeacons
 
 import android.util.Log
-import com.nextome.kbeaconscanner.KScanResultParser.asKScanResult
-import com.nextome.kbeaconscanner.data.ApplicationContext
-import com.nextome.kbeaconscanner.data.KScanResult
-import com.nextome.kbeaconscanner.utils.CFlow
-import com.nextome.kbeaconscanner.utils.wrap
+import com.nextome.kmmbeacons.KScanResultParser.asKScanResult
+import com.nextome.kmmbeacons.data.ApplicationContext
+import com.nextome.kmmbeacons.data.KScanResult
+import com.nextome.kmmbeacons.utils.CFlow
+import com.nextome.kmmbeacons.utils.wrap
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import org.altbeacon.beacon.BeaconManager

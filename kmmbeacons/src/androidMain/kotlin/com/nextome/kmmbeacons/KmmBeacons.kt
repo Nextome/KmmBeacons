@@ -1,5 +1,5 @@
-package com.nextome.kbeaconscanner
+package com.nextome.kmmbeacons
 
-import com.nextome.kbeaconscanner.data.ApplicationContext
+import com.nextome.kmmbeacons.data.ApplicationContext
 
 class KmmBeacons(context: ApplicationContext): KmmBeaconsBase(context)

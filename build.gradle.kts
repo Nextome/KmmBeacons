@@ -16,7 +16,7 @@ allprojects {
         mavenCentral()
     }
 
-    group = "com.nextome.kbeaconscanner"
+    group = "com.nextome.kmmbeacons"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: "0.0.1"
 }
 

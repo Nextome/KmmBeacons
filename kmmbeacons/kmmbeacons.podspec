@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for the Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/KBeaconScanner.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/kmmbeacons.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
                 
     spec.script_phases = [
         {
-            :name => 'Build KBeaconScanner',
+            :name => 'Build kmmbeacons',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT

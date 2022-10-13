@@ -3,7 +3,7 @@ package com.nextome.kmmtestproject.android
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.nextome.kbeaconscanner.KmmBeacons
+import com.nextome.kmmbeacons.KmmBeacons
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

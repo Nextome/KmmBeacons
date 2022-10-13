@@ -21,10 +21,10 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         ios.deploymentTarget = "14.1"
-        name = "KBeaconScanner"
+        name = "kmmbeacons"
 
         framework {
-            baseName = "KBeaconScanner"
+            baseName = "kmmbeacons"
         }
     }
     
@@ -75,58 +75,6 @@ android {
     defaultConfig {
         minSdk = 23
         targetSdk = 32
-    }
-}
-publishing{
-    publications {
-        register("mavenKotlin", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner"
-            version = "1.0.1"
-            artifact("$buildDir/libs/KBeaconScanner-kotlin-1.0.1-sources.jar")
-
-        }
-        register("mavenAndroidDebug", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner-android-debug"
-            version = "1.0.1"
-            artifact("$buildDir/libs/KBeaconScanner-android-debug-1.0.1-sources.jar")
-
-        }
-
-        register("mavenAndroid", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner-android"
-            version = "1.0.1"
-            artifact("$buildDir/libs/KBeaconScanner-android-1.0.1-sources.jar")
-
-        }
-
-        register("mavenIosArm64", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner-iosarm64"
-            version = "1.0.1"
-            artifact("$buildDir/libs/KBeaconScanner-iosarm64-1.0.1-sources.jar")
-
-        }
-        register("mavenIosSimulatorArm64", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner-iossimulatorarm64"
-            version = "1.0.1"
-            artifact("$buildDir/libs/KBeaconScanner-iossimulatorarm64-1.0.1-sources.jar")
-
-        }
-
-        register("mavenIosx86", MavenPublication::class) {
-            groupId = "com.annalabellarte.testScan"
-            artifactId = "KBeaconScanner-iosx64"
-            version = "1.0.1"
-
-            artifact("$buildDir/libs/KBeaconScanner-iosx64-1.0.1-sources.jar")
-
-        }
-
-
     }
 }
 

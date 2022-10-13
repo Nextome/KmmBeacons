@@ -1,4 +1,4 @@
-package com.nextome.kbeaconscanner.utils
+package com.nextome.kmmbeacons.utils
 
 public expect interface Closeable {
     public fun close()
