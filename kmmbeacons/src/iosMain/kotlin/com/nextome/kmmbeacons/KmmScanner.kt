@@ -78,8 +78,6 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
                 didRangeBeacons: List<*>,
                 satisfyingConstraint: CLBeaconIdentityConstraint
             ) {
-                super.locationManager(manager, didRangeBeacons, satisfyingConstraint)
-
                 val rangedBeacons = didRangeBeacons.map { it as CLBeacon }
                 val resultBeacons = rangedBeacons.filter { it.accuracy >= 0 }.map {
                     KScanResult(

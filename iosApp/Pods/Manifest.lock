@@ -1,16 +1,16 @@
 PODS:
-  - KBeaconScanner (0.0.1)
+  - kmmbeacons (0.0.1)
 
 DEPENDENCIES:
-  - KBeaconScanner (from `../KBeaconScanner`)
+  - kmmbeacons (from `../kmmbeacons`)
 
 EXTERNAL SOURCES:
-  KBeaconScanner:
-    :path: "../KBeaconScanner"
+  kmmbeacons:
+    :path: "../kmmbeacons"
 
 SPEC CHECKSUMS:
-  KBeaconScanner: ebc8c03b61d82256374e3ff62c35b3886f380691
+  kmmbeacons: cb9c8fc5f03a72a7837698a9d20f9094eaf813e2
 
-PODFILE CHECKSUM: 0a0cd21c804e1f9e0f4671550ec8144b87fe6c81
+PODFILE CHECKSUM: b1918865d9c9ead43b495f991cf1626e8ec6a784
 
 COCOAPODS: 1.11.2

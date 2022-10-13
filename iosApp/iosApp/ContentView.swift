@@ -1,5 +1,5 @@
 import SwiftUI
-import KBeaconScanner
+import kmmbeacons
 
 struct ContentView: View {
     @ObservedObject private(set) var viewModel: ViewModel
@@ -15,7 +15,6 @@ extension ContentView {
         var scanner = KmmBeacons()
         
         init() {
-            scanner.start()
             scanner.observeResults().watch(block: {scanResult in
                 print("ScanResult \(scanResult?.description ?? "empty")")
             })

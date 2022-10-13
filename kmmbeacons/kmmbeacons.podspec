@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'KBeaconScanner'
+    spec.name                     = 'kmmbeacons'
     spec.version                  = '0.0.1'
     spec.homepage                 = 'Link to the Shared Module homepage'
     spec.source                   = { :http=> ''}
@@ -12,8 +12,8 @@ Pod::Spec.new do |spec|
                 
                 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':KBeaconScanner',
-        'PRODUCT_MODULE_NAME' => 'KBeaconScanner',
+        'KOTLIN_PROJECT_PATH' => ':kmmbeacons',
+        'PRODUCT_MODULE_NAME' => 'kmmbeacons',
     }
                 
     spec.script_phases = [
