@@ -14,10 +14,17 @@ extension ContentView {
         @Published var text = "Loading..."
         var scanner = KmmBeacons()
         
+
+        
         init() {
-            scanner.observeResults().watch(block: {scanResult in
-                print("ScanResult \(scanResult?.description ?? "empty")")
+            print("init")
+
+            let obs = scanner.observeResults().watch(block: {scanResult in
+                print("\(scanResult?.description ?? "empty")")
             })
+            
+            // obs.close()
+        
 
             /*Greeting().helloFromStateFlow().watch(block: { text in
                 self.text = (text ?? "") as String

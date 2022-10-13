@@ -69,7 +69,7 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
             override fun locationManager(
                 manager: CLLocationManager,
                 didRangeBeacons: List<*>,
-                satisfyingConstraint: CLBeaconIdentityConstraint
+                inRegion: CLBeaconRegion,
             ) {
                 val rangedBeacons = didRangeBeacons.map { it as CLBeacon }
                 val resultBeacons = rangedBeacons.filter { it.accuracy >= 0 }.map {
@@ -84,7 +84,11 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
                     )
                 }
 
-                trySend(resultBeacons)
+
+                if (resultBeacons.isNotEmpty()) {
+                    print("Size ${resultBeacons.size}")
+                    trySend(resultBeacons)
+                }
             }
 
             override fun locationManager(
@@ -104,7 +108,6 @@ internal actual class KmmScanner actual constructor(): NSObject(), CLLocationMan
         startScan()
         awaitClose {
             stopScan()
-            locationManager.delegate = null
         }
     }.wrap()
 
