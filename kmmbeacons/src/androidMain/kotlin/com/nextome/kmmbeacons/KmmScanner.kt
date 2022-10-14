@@ -1,55 +1,66 @@
 package com.nextome.kmmbeacons
 
-import android.util.Log
 import com.nextome.kmmbeacons.KScanResultParser.asKScanResult
 import com.nextome.kmmbeacons.data.ApplicationContext
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
 import com.nextome.kmmbeacons.utils.wrap
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.BeaconParser
 import org.altbeacon.beacon.Region
 
-internal actual class KmmScanner{
-    private var regionUUID = DEFAULT_REGION_UUID
+internal actual class KmmScanner actual constructor(context: ApplicationContext?) {
 
-    private val rangingRegion = Region(regionUUID, null, null, null)
-
-    private val beaconManager: BeaconManager = BeaconManager.getInstanceForApplication(context).apply {
-        beaconParsers.add(BeaconParser().setBeaconLayout(BEACON_LAYOUT_IBEACON))
-    }
+    private val applicationContext: ApplicationContext
+    private val beaconManager: BeaconManager
 
     init {
+        requireNotNull(context) { "Library must be initialized with KmmBeacons.init(application)" }
+        applicationContext = context
+        beaconManager = BeaconManager.getInstanceForApplication(applicationContext).apply {
+            beaconParsers.add(BeaconParser().setBeaconLayout(BEACON_LAYOUT_IBEACON))
+        }
         setScanPeriod(DEFAULT_PERIOD_SCAN)
         setBetweenScanPeriod(DEFAULT_PERIOD_BETWEEEN_SCAN)
     }
 
-    private fun start() {
-        Log.e("test", "Start Called")
+    private var regionUUID = DEFAULT_REGION_UUID
+
+    private val scannerFlow = MutableSharedFlow<List<KScanResult>>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+
+    private val rangingRegion = Region(regionUUID, null, null, null)
+
+
+    private val _errorObservable = MutableSharedFlow<Exception>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+
+
+    actual fun start() {
         with (beaconManager) {
             stopRangingBeacons(rangingRegion)
             removeAllRangeNotifiers()
+
+            addRangeNotifier { beacons, _ ->
+                scannerFlow.tryEmit(
+                    beacons
+                        .filterNotNull()
+                        .map { it.asKScanResult() })
+            }
+
             startRangingBeacons(rangingRegion)
         }
     }
 
-    actual fun observeResults(): CFlow<List<KScanResult>> = callbackFlow{
-        start()
+    actual fun observeResults(): CFlow<List<KScanResult>> = scannerFlow.wrap()
 
-        beaconManager.addRangeNotifier { beacons, _ ->
-            trySend(beacons
-                .filterNotNull()
-                .map { it.asKScanResult() })
-        }
-
-        awaitClose { stop() }
-    }.wrap()
-
-    private fun stop() {
-        Log.e("test", "Stop called")
-
+    actual fun stop() {
         with (beaconManager) {
             stopRangingBeacons(rangingRegion)
         }
@@ -71,11 +82,7 @@ internal actual class KmmScanner{
         }
     }
 
-    actual companion object Factory {
-        lateinit var context: ApplicationContext
-
-        actual fun init(context: ApplicationContext){
-            this.context = context
-        }
+    actual fun observeErrors(): CFlow<Exception> {
+        return _errorObservable.wrap()
     }
 }

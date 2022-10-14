@@ -1,5 +1,6 @@
 package com.nextome.kmmbeacons.data
 
+import platform.CoreLocation.CLBeacon
 import platform.CoreLocation.CLProximity
 
 fun CLProximity.asKScanProximity(): KScanProximity {
@@ -11,3 +12,16 @@ fun CLProximity.asKScanProximity(): KScanProximity {
         else -> KScanProximity.UNKNOWN
     }
 }
+
+fun List<CLBeacon>.asKScanResult() =
+    filter { it.accuracy >= 0 }.map {
+        KScanResult(
+            it.UUID.UUIDString,
+            it.rssi.toDouble(),
+            it.minor.intValue,
+            it.major.intValue,
+            0,
+            it.accuracy,
+            it.proximity.asKScanProximity()
+        )
+    }

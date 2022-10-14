@@ -9,12 +9,12 @@ const val DEFAULT_PERIOD_BETWEEEN_SCAN = 250L
 const val DEFAULT_REGION_UUID = "KBeaconScannerRanging"
 const val BEACON_LAYOUT_IBEACON = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25,i:0-56"
 
-internal expect class KmmScanner() {
+internal expect class KmmScanner(context: ApplicationContext?) {
     fun setScanPeriod(scanPeriod: Long)
     fun setBetweenScanPeriod(betweenScanPeriod: Long)
     fun observeResults(): CFlow<List<KScanResult>>
 
-    companion object Factory {
-        fun init(context: ApplicationContext)
-    }
+    fun observeErrors(): CFlow<Exception>
+    fun start()
+    fun stop()
 }
