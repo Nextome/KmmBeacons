@@ -1,6 +1,7 @@
 package com.nextome.kmmbeacons
 
 import com.nextome.kmmbeacons.data.ApplicationContext
+import com.nextome.kmmbeacons.data.KScanRegion
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
 
@@ -11,6 +12,8 @@ class KmmBeacons{
     fun setBetweenScanPeriod(betweenScanPeriod: Long) = scanner.setBetweenScanPeriod(betweenScanPeriod)
     fun observeResults(): CFlow<List<KScanResult>> = scanner.observeResults()
     fun observeErrors(): CFlow<Exception> = scanner.observeErrors()
+    fun setIosRegions(regions: List<KScanRegion>) = scanner.setIosRegions(regions)
+    fun setAndroidRegions(regions: List<KScanRegion>) = scanner.setAndroidRegions(regions)
     fun startScan() = scanner.start()
     fun stopScan() = scanner.stop()
 
