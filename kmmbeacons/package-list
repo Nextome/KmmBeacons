@@ -1,0 +1,56 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.nextome.kmmbeacons.data////PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity.FAR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-f-a-r/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity.IMMEDIATE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-i-m-m-e-d-i-a-t-e/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity.NEAR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-n-e-a-r/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity.UNKNOWN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-u-n-k-n-o-w-n/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity/valueOf/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/value-of.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity/values/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/values.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanRegion///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanRegion/KScanRegion/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/-k-scan-region.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanRegion/uuid/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/uuid.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/KScanResult/#kotlin.String#kotlin.Double#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Double?#com.nextome.kmmbeacons.data.KScanProximity#kotlin.Array[kotlin.Byte]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/-k-scan-result.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/accuracy/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/accuracy.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/major/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/major.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/minor/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/minor.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/proximity/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/proximity.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/rawBytes/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/raw-bytes.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/rssi/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/rssi.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/txPower/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/tx-power.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/uuid/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/uuid.html
+$dokka.location:com.nextome.kmmbeacons.utils////PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/index.html
+$dokka.location:com.nextome.kmmbeacons.utils//use/TypeParam(bounds=[com.nextome.kmmbeacons.utils.Closeable])#kotlin.Function1[TypeParam(bounds=[com.nextome.kmmbeacons.utils.Closeable]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/use.html
+$dokka.location:com.nextome.kmmbeacons.utils//wrap/kotlinx.coroutines.flow.Flow[TypeParam(bounds=[kotlin.Any?])]#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/wrap.html
+$dokka.location:com.nextome.kmmbeacons.utils/CFlow///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/-c-flow/index.html
+$dokka.location:com.nextome.kmmbeacons.utils/CFlow/CFlow/#kotlinx.coroutines.flow.Flow[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/-c-flow/-c-flow.html
+$dokka.location:com.nextome.kmmbeacons.utils/CFlow/watch/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Unit]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/-c-flow/watch.html
+$dokka.location:com.nextome.kmmbeacons.utils/Closeable///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/-closeable/index.html
+$dokka.location:com.nextome.kmmbeacons.utils/Closeable/close/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.utils/-closeable/close.html
+$dokka.location:com.nextome.kmmbeacons////PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/index.html
+$dokka.location:com.nextome.kmmbeacons//BEACON_LAYOUT_IBEACON/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-b-e-a-c-o-n_-l-a-y-o-u-t_-i-b-e-a-c-o-n.html
+$dokka.location:com.nextome.kmmbeacons//DEFAULT_PERIOD_BETWEEEN_SCAN/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-d-e-f-a-u-l-t_-p-e-r-i-o-d_-b-e-t-w-e-e-e-n_-s-c-a-n.html
+$dokka.location:com.nextome.kmmbeacons//DEFAULT_PERIOD_SCAN/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-d-e-f-a-u-l-t_-p-e-r-i-o-d_-s-c-a-n.html
+$dokka.location:com.nextome.kmmbeacons/KScanResultParser///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-k-scan-result-parser/index.html
+$dokka.location:com.nextome.kmmbeacons/KScanResultParser/asKScanResult/org.altbeacon.beacon.Beacon#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-k-scan-result-parser/as-k-scan-result.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/index.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/KmmBeacons/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/-kmm-beacons.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/observeErrors/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/observe-errors.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/observeResults/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/observe-results.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/setAndroidRegions/#kotlin.collections.List[com.nextome.kmmbeacons.data.KScanRegion]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-android-regions.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/setBetweenScanPeriod/#kotlin.Long/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-between-scan-period.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/setIosRegions/#kotlin.collections.List[com.nextome.kmmbeacons.data.KScanRegion]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-ios-regions.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/setScanPeriod/#kotlin.Long/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-scan-period.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/startScan/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/start-scan.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/stopScan/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/stop-scan.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeaconsContext///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons-context/index.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeaconsInitializer///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons-initializer/index.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeaconsInitializer/KmmBeaconsInitializer/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons-initializer/-kmm-beacons-initializer.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeaconsInitializer/create/#android.content.Context/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons-initializer/create.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeaconsInitializer/dependencies/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons-initializer/dependencies.html
+com.nextome.kmmbeacons
+com.nextome.kmmbeacons.data
+com.nextome.kmmbeacons.utils
+
