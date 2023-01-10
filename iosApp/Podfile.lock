@@ -1,0 +1,16 @@
+PODS:
+  - kmmbeacons (0.0.9)
+
+DEPENDENCIES:
+  - kmmbeacons (from `../kmmbeacons`)
+
+EXTERNAL SOURCES:
+  kmmbeacons:
+    :path: "../kmmbeacons"
+
+SPEC CHECKSUMS:
+  kmmbeacons: 588cbe28c768c321c0d8ba3f52a5e9adc7157f46
+
+PODFILE CHECKSUM: b1918865d9c9ead43b495f991cf1626e8ec6a784
+
+COCOAPODS: 1.11.2
