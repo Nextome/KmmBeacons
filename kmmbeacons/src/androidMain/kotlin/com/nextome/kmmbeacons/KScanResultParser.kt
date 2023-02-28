@@ -17,7 +17,9 @@ object KScanResultParser {
             rssi = rssiToDouble,
             txPower = this.txPower,
             accuracy = calculateAccuracy(txPower, rssiToDouble),
-            proximity = proximity)
+            proximity = proximity,
+            rawBytes = this.lastPacketRawBytes.toTypedArray(),
+        )
     }
 
     private fun calculateAccuracy(txPower: Int, rssi: Double): Double {
