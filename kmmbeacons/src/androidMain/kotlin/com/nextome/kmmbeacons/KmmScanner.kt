@@ -12,11 +12,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import org.altbeacon.beacon.*
+import java.util.concurrent.ConcurrentHashMap
 
 
 internal class AndroidKmmScanner: KmmScanner {
     private var isScanning = false
-    private var lastScanBeacons = mutableSetOf<Beacon>()
+    private var lastScanBeacons = ConcurrentHashMap<String, Beacon>()
 
     private var currentScanPeriod = DEFAULT_PERIOD_SCAN
     private var currentBetweenScanPeriod = DEFAULT_PERIOD_BETWEEEN_SCAN
@@ -47,7 +48,9 @@ internal class AndroidKmmScanner: KmmScanner {
                 stopRangingBeacons(region)
 
                 addRangeNotifier { beacons, _ ->
-                    lastScanBeacons.addAll(beacons)
+                    beacons.forEach {
+                        lastScanBeacons["${it.id1};${it.id2};${it.id3}"] = it
+                    }
                 }
 
                 startRangingBeacons(region)
@@ -65,7 +68,7 @@ internal class AndroidKmmScanner: KmmScanner {
 
     override fun observeResults(): CFlow<List<KScanResult>> = flow{
         while(true) {
-            val beaconsToEmit = lastScanBeacons.toMutableList()
+            val beaconsToEmit = lastScanBeacons.values.toList()
             lastScanBeacons.clear()
             emit(beaconsToEmit.map { it.asKScanResult() })
             delay(currentScanPeriod + currentBetweenScanPeriod)

@@ -1,7 +1,7 @@
 package com.nextome.kmmbeacons
 
 import co.touchlab.kermit.Logger
-import com.nextome.kmmbeacons.data.KScanRegion
+import co.touchlab.stately.collections.ConcurrentMutableList
 import com.nextome.kmmbeacons.data.asKScanResult
 import com.nextome.kmmbeacons.utils.CFlow
 import com.nextome.kmmbeacons.utils.wrap
@@ -35,7 +35,7 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
     private var scanTime  = DEFAULT_PERIOD_SCAN
     private var betweenScanTime = DEFAULT_PERIOD_BETWEEEN_SCAN
 
-    private var lastScanBeacons = mutableSetOf<CLBeacon>()
+    private var lastScanBeacons = ConcurrentMutableList<CLBeacon>()
     private var isScanning = false
 
     init {

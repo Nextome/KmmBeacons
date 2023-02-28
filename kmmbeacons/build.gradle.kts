@@ -33,7 +33,7 @@ kotlin {
             dependencies {
                 implementation("co.touchlab:kermit:1.1.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-
+                implementation("co.touchlab:stately-concurrent-collections:2.0.0-rc1")
             }
         }
         val commonTest by getting {
@@ -43,7 +43,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.altbeacon:android-beacon-library:2.19.4")
+                implementation("org.altbeacon:android-beacon-library:2.19.5")
                 implementation("androidx.startup:startup-runtime:1.1.1")
             }
         }
