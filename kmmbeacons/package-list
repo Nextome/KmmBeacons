@@ -12,7 +12,7 @@ $dokka.location:com.nextome.kmmbeacons.data/KScanRegion///PointingToDeclaration/
 $dokka.location:com.nextome.kmmbeacons.data/KScanRegion/KScanRegion/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/-k-scan-region.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRegion/uuid/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/uuid.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanResult///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/index.html
-$dokka.location:com.nextome.kmmbeacons.data/KScanResult/KScanResult/#kotlin.String#kotlin.Double#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Double?#com.nextome.kmmbeacons.data.KScanProximity#kotlin.Array[kotlin.Byte]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/-k-scan-result.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanResult/KScanResult/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Double#kotlin.Int#kotlin.Double?#com.nextome.kmmbeacons.data.KScanProximity#kotlin.Array[kotlin.Byte]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/-k-scan-result.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanResult/accuracy/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/accuracy.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanResult/major/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/major.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanResult/minor/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-result/minor.html
