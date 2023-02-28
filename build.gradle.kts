@@ -1,4 +1,9 @@
+plugins {
+    kotlin("multiplatform") version "1.8.0" apply false
+}
+
 buildscript {
+
     repositories {
         gradlePluginPortal()
         google()
@@ -17,7 +22,7 @@ allprojects {
     }
 
     group = "com.nextome.kmmbeacons"
-    val libraryVersion = "1.0.0"
+    val libraryVersion = "1.1.0"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: libraryVersion
 }
 

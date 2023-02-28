@@ -13,9 +13,10 @@ jobs:
        uses: actions/setup-java@v1
        with:
            java-version: 11
-
      - name: Publish
-       run: gradle check publish --no-configure-on-demand --no-daemon
+       run: |
+           cd ${GITHUB_WORKSPACE}
+           ./gradlew check publish --no-configure-on-demand --no-daemon
        env:
            ORG_GRADLE_PROJECT_githubUsername: ${{ github.actor }}
            ORG_GRADLE_PROJECT_githubPassword: ${{ github.token }}
