@@ -31,6 +31,7 @@ internal class AndroidKmmScanner: KmmScanner {
             BeaconManager.getInstanceForApplication(applicationContext).apply {
                 beaconParsers.add(BeaconParser().setBeaconLayout(BEACON_LAYOUT_IBEACON))
                 setEnableScheduledScanJobs(false)
+                isRegionStatePersistenceEnabled = false
             }
         }
     }

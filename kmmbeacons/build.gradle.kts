@@ -43,7 +43,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.altbeacon:android-beacon-library:2.19.5")
+                implementation("org.altbeacon:android-beacon-library:2.19.6-beta3")
                 implementation("androidx.startup:startup-runtime:1.1.1")
             }
         }
