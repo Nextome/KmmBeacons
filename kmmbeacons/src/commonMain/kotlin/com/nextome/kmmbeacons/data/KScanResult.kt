@@ -41,7 +41,12 @@ data class KScanResult(
      * This is available on Android only.
      */
     var rawBytes: Array<Byte> = arrayOf()
-)
+) {
+    /**
+     * Returns an unique key that identifies this beacon
+     */
+    fun getKey() = "${uuid};${major};${minor}"
+}
 
 
 

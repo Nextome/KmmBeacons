@@ -1,5 +1,6 @@
 package com.nextome.kmmbeacons
 
+import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
@@ -33,6 +34,13 @@ class KmmBeacons {
      * It is possible to adjust delivery time with [setScanPeriod] and [setBetweenScanPeriod].
      */
     fun observeResults(): CFlow<List<KScanResult>> = scanner.observeResults()
+
+    /**
+     * Observe non-Beacon BLE Devices raw data.
+     * On iOS, this always returns an empty list due to OS restrictions.
+     * Results with be delivered according times set with [setScanPeriod] and [setBetweenScanPeriod].
+     */
+    fun observeNonBeacons(): CFlow<List<KScanRecord>> = scanner.observeNonBeacons()
 
     /**
      * Listen for errors during scans;

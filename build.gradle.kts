@@ -22,7 +22,7 @@ allprojects {
     }
 
     group = "com.nextome.kmmbeacons"
-    val libraryVersion = "1.1.1"
+    val libraryVersion = "1.2.0"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: libraryVersion
 }
 

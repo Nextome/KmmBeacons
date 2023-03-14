@@ -28,6 +28,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.observeNonBeacons().collectLatest {
+                    Log.i("KmmBeacons", "Found ${it.size} non beacons with addresses:")
+                    Log.i("KmmBeacons", "${it.joinToString { "${it.deviceAddress}\n" }}")
+                }
+            }
+        }
     }
 
     override fun onPause() {

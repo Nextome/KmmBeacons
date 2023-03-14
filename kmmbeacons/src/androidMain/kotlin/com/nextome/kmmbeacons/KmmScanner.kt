@@ -2,25 +2,48 @@
 package com.nextome.kmmbeacons
 
 import com.nextome.kmmbeacons.KScanResultParser.asKScanResult
+import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
 import com.nextome.kmmbeacons.utils.wrap
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import org.altbeacon.beacon.*
 import java.util.concurrent.ConcurrentHashMap
 
 
 internal class AndroidKmmScanner: KmmScanner {
     private var isScanning = false
-    private var lastScanBeacons = ConcurrentHashMap<String, Beacon>()
+    private var lastScanBeacons = ConcurrentHashMap<String, KScanResult>()
+    private var lastScanNonBeacons = ConcurrentHashMap<String, KScanRecord>()
 
     private var currentScanPeriod = DEFAULT_PERIOD_SCAN
     private var currentBetweenScanPeriod = DEFAULT_PERIOD_BETWEEEN_SCAN
+
+    private val scanBeaconFlow = MutableSharedFlow<List<KScanResult>>(
+        replay = 1,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.SUSPEND
+    )
+    private val scanNonBeaconFlow = MutableSharedFlow<List<KScanRecord>>(
+        replay = 1,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.SUSPEND
+    )
+
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.Default + job)
+
+    private var beaconEmitJob: Job? = null
+    private var nonBeaconEmitJob: Job? = null
 
     init {
         setScanPeriod(currentScanPeriod)
@@ -41,6 +64,10 @@ internal class AndroidKmmScanner: KmmScanner {
 
     override fun start() {
         isScanning = true
+
+        startEmittingBeaconsJob()
+        startEmittingNonBeaconsJob()
+
         provideDefaultRegionIfNecessary()
         with (beaconManager) {
             removeAllRangeNotifiers()
@@ -48,9 +75,17 @@ internal class AndroidKmmScanner: KmmScanner {
             regionsList.forEach { region ->
                 stopRangingBeacons(region)
 
+                setNonBeaconLeScanCallback { device, rssi, scanRecord ->
+                    lastScanNonBeacons[device.address] = KScanRecord(
+                        deviceAddress = device.address,
+                        scanRecord)
+                }
+
                 addRangeNotifier { beacons, _ ->
                     beacons.forEach {
-                        lastScanBeacons["${it.id1};${it.id2};${it.id3}"] = it
+                        with (it.asKScanResult()) {
+                            lastScanBeacons[getKey()] = this
+                        }
                     }
                 }
 
@@ -66,18 +101,43 @@ internal class AndroidKmmScanner: KmmScanner {
             )
         }
     }
+    override fun observeResults(): CFlow<List<KScanResult>> = scanBeaconFlow.wrap()
+    override fun observeNonBeacons(): CFlow<List<KScanRecord>> = scanNonBeaconFlow.wrap()
 
-    override fun observeResults(): CFlow<List<KScanResult>> = flow{
-        while(true) {
-            val beaconsToEmit = lastScanBeacons.values.toList()
-            lastScanBeacons.clear()
-            emit(beaconsToEmit.map { it.asKScanResult() })
-            delay(currentScanPeriod + currentBetweenScanPeriod)
+    private fun startEmittingBeaconsJob() {
+        if (beaconEmitJob == null) {
+            beaconEmitJob = scope.launch {
+                while (true) {
+                    val beaconsToEmit = lastScanBeacons.values.toList()
+                    lastScanBeacons.clear()
+                    scanBeaconFlow.tryEmit(beaconsToEmit)
+                    delay(currentScanPeriod + currentBetweenScanPeriod)
+                }
+            }
         }
-    }.wrap()
+    }
+
+    private fun startEmittingNonBeaconsJob() {
+        if (nonBeaconEmitJob == null) {
+            nonBeaconEmitJob = scope.launch {
+                while (true) {
+                    val nonBeaconsToEmit = lastScanNonBeacons.values.toList()
+                    lastScanNonBeacons.clear()
+                    scanNonBeaconFlow.tryEmit(nonBeaconsToEmit)
+                    delay(currentScanPeriod + currentBetweenScanPeriod)
+                }
+            }
+        }
+    }
 
     override fun stop() {
         isScanning = false
+
+        beaconEmitJob?.cancel()
+        beaconEmitJob = null
+
+        nonBeaconEmitJob?.cancel()
+        nonBeaconEmitJob = null
 
         with (beaconManager) {
             regionsList.forEach { region ->

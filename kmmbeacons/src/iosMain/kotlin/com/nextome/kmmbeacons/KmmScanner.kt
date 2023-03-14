@@ -1,8 +1,11 @@
 package com.nextome.kmmbeacons
 
+import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
+import com.nextome.kmmbeacons.utils.wrap
+import kotlinx.coroutines.flow.flowOf
 
 import platform.CoreLocation.*
 import platform.Foundation.NSUUID
@@ -22,6 +25,10 @@ internal class IosKmmScanner: KmmScanner {
 
     override fun observeResults(): CFlow<List<KScanResult>> {
         return iosScannerManager.observeResults()
+    }
+
+    override fun observeNonBeacons(): CFlow<List<KScanRecord>> {
+        return flowOf<List<KScanRecord>>().wrap()
     }
 
     override fun setIosRegions(regions: List<KScanRegion>) {

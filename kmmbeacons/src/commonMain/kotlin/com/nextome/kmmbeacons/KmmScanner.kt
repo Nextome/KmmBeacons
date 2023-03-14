@@ -1,5 +1,6 @@
 package com.nextome.kmmbeacons
 
+import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion
 import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.utils.CFlow
@@ -12,6 +13,8 @@ internal interface KmmScanner {
     fun setScanPeriod(scanPeriod: Long)
     fun setBetweenScanPeriod(betweenScanPeriod: Long)
     fun observeResults(): CFlow<List<KScanResult>>
+
+    fun observeNonBeacons(): CFlow<List<KScanRecord>>
 
     fun setIosRegions(regions: List<KScanRegion>)
     fun setAndroidRegions(region: List<KScanRegion>)

@@ -1,14 +1,19 @@
 package com.nextome.kmmbeacons
 
 import co.touchlab.kermit.Logger
-import co.touchlab.stately.collections.ConcurrentMutableList
+import co.touchlab.stately.collections.ConcurrentMutableMap
+import com.nextome.kmmbeacons.data.KScanResult
 import com.nextome.kmmbeacons.data.asKScanResult
 import com.nextome.kmmbeacons.utils.CFlow
 import com.nextome.kmmbeacons.utils.wrap
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import platform.CoreLocation.CLBeacon
 import platform.CoreLocation.CLBeaconRegion
 import platform.CoreLocation.CLLocationManager
@@ -35,8 +40,19 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
     private var scanTime  = DEFAULT_PERIOD_SCAN
     private var betweenScanTime = DEFAULT_PERIOD_BETWEEEN_SCAN
 
-    private var lastScanBeacons = ConcurrentMutableList<CLBeacon>()
+    private var lastScanBeacons = ConcurrentMutableMap<String, KScanResult>()
     private var isScanning = false
+
+    private val scanBeaconFlow = MutableSharedFlow<List<KScanResult>>(
+        replay = 1,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.SUSPEND
+    )
+
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.Default + job)
+
+    private var beaconEmitJob: Job? = null
 
     init {
         locationManager.delegate = this
@@ -70,8 +86,11 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
         didRangeBeacons: List<*>,
         inRegion: CLBeaconRegion
     ) {
-        val rangedBeacons = didRangeBeacons.map { it as CLBeacon }
-        lastScanBeacons.addAll(rangedBeacons)
+        didRangeBeacons.forEach {
+                with ((it as CLBeacon).asKScanResult()) {
+                    lastScanBeacons[getKey()] = this
+                }
+            }
     }
 
     override fun locationManager(
@@ -93,17 +112,23 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
 
     internal fun start() {
         startRegionOrAskPermissions()
+        startEmittingBeaconsJob()
     }
 
-    internal fun observeResults() = flow{
-        while (true) {
-            val beaconsToEmit = lastScanBeacons.toMutableList()
-            lastScanBeacons.clear()
-            emit(beaconsToEmit.asKScanResult())
-            delay(scanTime + betweenScanTime)
-        }
-    }.wrap()
+    internal fun observeResults(): CFlow<List<KScanResult>> = scanBeaconFlow.wrap()
 
+    private fun startEmittingBeaconsJob() {
+        if (beaconEmitJob == null) {
+            beaconEmitJob = scope.launch {
+                while (true) {
+                    val beaconsToEmit = lastScanBeacons.values.toList()
+                    lastScanBeacons.clear()
+                    scanBeaconFlow.tryEmit(beaconsToEmit)
+                    delay(scanTime + betweenScanTime)
+                }
+            }
+        }
+    }
     internal fun stop() {
         isScanning = false
 

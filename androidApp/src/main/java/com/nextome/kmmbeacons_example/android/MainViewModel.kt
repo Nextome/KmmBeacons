@@ -16,6 +16,8 @@ class MainViewModel(ctx: Application): AndroidViewModel(ctx) {
     fun stopScan() = kmmBeacons.stopScan()
     fun observeResults() = kmmBeacons.observeResults()
 
+    fun observeNonBeacons() = kmmBeacons.observeNonBeacons()
+
     override fun onCleared() {
         super.onCleared()
         stopScan()

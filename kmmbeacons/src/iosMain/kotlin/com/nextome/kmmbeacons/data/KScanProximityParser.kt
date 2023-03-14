@@ -13,15 +13,13 @@ internal fun CLProximity.asKScanProximity(): KScanProximity {
     }
 }
 
-internal fun List<CLBeacon>.asKScanResult() =
-    filter { it.accuracy >= 0 }.map {
-        KScanResult(
-            uuid = it.UUID.UUIDString,
-            major = it.major.intValue,
-            minor = it.minor.intValue,
-            rssi = it.rssi.toDouble(),
-            txPower = 0,
-            accuracy = it.accuracy,
-            proximity = it.proximity.asKScanProximity()
-        )
-    }
+internal fun CLBeacon.asKScanResult(): KScanResult =
+    KScanResult(
+        uuid = this.UUID.UUIDString,
+        major = this.major.intValue,
+        minor = this.minor.intValue,
+        rssi = this.rssi.toDouble(),
+        txPower = 0,
+        accuracy = this.accuracy,
+        proximity = this.proximity.asKScanProximity()
+    )

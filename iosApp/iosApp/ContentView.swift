@@ -29,6 +29,7 @@ extension ContentView {
             regions.append(KScanRegion(uuid: "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"))
             
             scanner.setIosRegions(regions: regions)
+        
             scanner.startScan()
 
             let obs = scanner.observeResults().watch(block: {scanResult in
