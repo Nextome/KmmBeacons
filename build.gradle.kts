@@ -11,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
-        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("com.android.tools.build:gradle:7.4.2")
     }
 }
 
@@ -22,7 +22,7 @@ allprojects {
     }
 
     group = "com.nextome.kmmbeacons"
-    val libraryVersion = "1.2.0"
+    val libraryVersion = "1.2.1"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: libraryVersion
 }
 

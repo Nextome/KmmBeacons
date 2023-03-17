@@ -21,5 +21,6 @@ internal fun CLBeacon.asKScanResult(): KScanResult =
         rssi = this.rssi.toDouble(),
         txPower = 0,
         accuracy = this.accuracy,
-        proximity = this.proximity.asKScanProximity()
+        proximity = this.proximity.asKScanProximity(),
+        bluetoothName = null,
     )

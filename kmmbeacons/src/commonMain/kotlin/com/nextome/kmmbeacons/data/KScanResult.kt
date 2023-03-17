@@ -37,6 +37,17 @@ data class KScanResult(
      */
     val proximity: KScanProximity,
     /**
+     * Bluetooth name of the devices.
+     * if detected by the OS from the advertisement data.
+     *
+     * On Android, this field will never be populated for apps targeting Android SDK 31+
+     * unless the app has obtained BLUETOOTH_CONNECT permission,
+     * as that permission is a new requirement from Android to read this field.
+     *
+     * On iOS, this is always null.
+     */
+     val bluetoothName: String?,
+    /**
      * Raw bytes of beacon advertisement.
      * This is available on Android only.
      */

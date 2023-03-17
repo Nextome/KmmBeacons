@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                     Log.i("KmmBeacons", "Found ${it.size} beacons:")
 
                     it.forEach {
-                        Log.i("KmmBeacons", "${it.uuid}, ${it.major}, ${it.minor}")
+                        Log.i("KmmBeacons", "Name ${it.bluetoothName}: ${it.uuid}, ${it.major}, ${it.minor}")
                     }
                 }
             }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.observeNonBeacons().collectLatest {
                     Log.i("KmmBeacons", "Found ${it.size} non beacons with addresses:")
-                    Log.i("KmmBeacons", "${it.joinToString { "${it.deviceAddress}\n" }}")
+                    Log.i("KmmBeacons", "${it.joinToString { "${it.deviceName}\n" }}")
                 }
             }
         }

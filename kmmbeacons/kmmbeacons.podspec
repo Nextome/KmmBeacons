@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'kmmbeacons'
-    spec.version                  = '1.2.0'
+    spec.version                  = '1.2.1'
     spec.homepage                 = 'https://github.com/Nextome/KmmBeacons'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''

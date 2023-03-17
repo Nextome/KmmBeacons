@@ -18,6 +18,7 @@ object KScanResultParser {
             txPower = this.txPower,
             accuracy = calculateAccuracy(txPower, rssiToDouble),
             proximity = proximity,
+            bluetoothName = this.bluetoothName,
             rawBytes = this.lastPacketRawBytes.toTypedArray(),
         )
     }

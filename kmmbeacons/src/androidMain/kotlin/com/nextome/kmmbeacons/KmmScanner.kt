@@ -1,6 +1,10 @@
 @file:JvmName("KmmScannerJvm")
 package com.nextome.kmmbeacons
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import com.nextome.kmmbeacons.KScanResultParser.asKScanResult
 import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion
@@ -62,6 +66,7 @@ internal class AndroidKmmScanner: KmmScanner {
 
     private val regionsList = mutableListOf<Region>()
 
+    @SuppressLint("MissingPermission")
     override fun start() {
         isScanning = true
 
@@ -76,9 +81,18 @@ internal class AndroidKmmScanner: KmmScanner {
                 stopRangingBeacons(region)
 
                 setNonBeaconLeScanCallback { device, rssi, scanRecord ->
+                    var name: String? = null
+
+                    try {
+                        name = device.name
+                    } catch (e: Exception) {
+                        // user doesn't have BLUETOOTH_CONNECT permissions
+                    }
+
                     lastScanNonBeacons[device.address] = KScanRecord(
                         deviceAddress = device.address,
-                        scanRecord)
+                        deviceName = name,
+                        rawBytes = scanRecord)
                 }
 
                 addRangeNotifier { beacons, _ ->
