@@ -122,9 +122,14 @@ internal class AndroidKmmScanner: KmmScanner {
         if (beaconEmitJob == null) {
             beaconEmitJob = scope.launch {
                 while (true) {
-                    val beaconsToEmit = lastScanBeacons.values.toList()
-                    lastScanBeacons.clear()
-                    scanBeaconFlow.tryEmit(beaconsToEmit)
+                    try {
+                        val beaconsToEmit = lastScanBeacons.values.toList()
+                        lastScanBeacons.clear()
+                        scanBeaconFlow.tryEmit(beaconsToEmit)
+                    } catch (e: NoSuchElementException) {
+                        // issues during iteration on values
+                    }
+
                     delay(currentScanPeriod + currentBetweenScanPeriod)
                 }
             }
@@ -135,10 +140,14 @@ internal class AndroidKmmScanner: KmmScanner {
         if (nonBeaconEmitJob == null) {
             nonBeaconEmitJob = scope.launch {
                 while (true) {
-                    val nonBeaconsToEmit = lastScanNonBeacons.values.toList()
-                    lastScanNonBeacons.clear()
-                    scanNonBeaconFlow.tryEmit(nonBeaconsToEmit)
-                    delay(currentScanPeriod + currentBetweenScanPeriod)
+                    try {
+                        val nonBeaconsToEmit = lastScanNonBeacons.values.toList()
+                        lastScanNonBeacons.clear()
+                        scanNonBeaconFlow.tryEmit(nonBeaconsToEmit)
+                        delay(currentScanPeriod + currentBetweenScanPeriod)
+                    } catch (e: NoSuchElementException) {
+                        // issues during iteration on values
+                    }
                 }
             }
         }

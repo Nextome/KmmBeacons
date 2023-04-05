@@ -121,9 +121,15 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
         if (beaconEmitJob == null) {
             beaconEmitJob = scope.launch {
                 while (true) {
-                    val beaconsToEmit = lastScanBeacons.values.toList()
-                    lastScanBeacons.clear()
-                    scanBeaconFlow.tryEmit(beaconsToEmit)
+                    try {
+                        val beaconsToEmit = lastScanBeacons.values.toList()
+                        lastScanBeacons.clear()
+                        scanBeaconFlow.tryEmit(beaconsToEmit)
+
+                    } catch (e: NoSuchElementException) {
+                        // issues during iteration on values
+                    }
+
                     delay(scanTime + betweenScanTime)
                 }
             }
