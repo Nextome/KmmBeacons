@@ -59,4 +59,9 @@ class KmmBeacons {
      * If no region is provided, Android will return beacons with all UUIDS.
      */
     fun setAndroidRegions(regions: List<KScanRegion>) = scanner.setAndroidRegions(regions)
+
+    /**
+     * Filter beacons (and non beacons) which have an RSSI value below [value].
+     */
+    fun setRssiThreshold(value: Int) = scanner.setRssiThreshold(value)
 }

@@ -19,6 +19,8 @@ internal interface KmmScanner {
     fun setIosRegions(regions: List<KScanRegion>)
     fun setAndroidRegions(region: List<KScanRegion>)
 
+    fun setRssiThreshold(threshold: Int)
+
     fun observeErrors(): CFlow<Exception>
     fun start()
     fun stop()

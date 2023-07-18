@@ -15,6 +15,7 @@ class MainViewModel(ctx: Application): AndroidViewModel(ctx) {
     fun startScan() = kmmBeacons.startScan()
     fun stopScan() = kmmBeacons.stopScan()
     fun observeResults() = kmmBeacons.observeResults()
+    fun setRssiThreshold(value: Int) = kmmBeacons.setRssiThreshold(value)
 
     fun observeNonBeacons() = kmmBeacons.observeNonBeacons()
 

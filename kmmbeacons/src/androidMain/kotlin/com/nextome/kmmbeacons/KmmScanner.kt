@@ -49,6 +49,8 @@ internal class AndroidKmmScanner: KmmScanner {
     private var beaconEmitJob: Job? = null
     private var nonBeaconEmitJob: Job? = null
 
+    private var rssiThreshold: Int? = null
+
     init {
         setScanPeriod(currentScanPeriod)
         setBetweenScanPeriod(currentBetweenScanPeriod)
@@ -92,7 +94,8 @@ internal class AndroidKmmScanner: KmmScanner {
                     lastScanNonBeacons[device.address] = KScanRecord(
                         deviceAddress = device.address,
                         deviceName = name,
-                        rawBytes = scanRecord)
+                        rawBytes = scanRecord,
+                        rssi = rssi)
                 }
 
                 addRangeNotifier { beacons, _ ->
@@ -123,7 +126,14 @@ internal class AndroidKmmScanner: KmmScanner {
             beaconEmitJob = scope.launch {
                 while (true) {
                     try {
-                        val beaconsToEmit = lastScanBeacons.values.toList()
+                        val threshold = rssiThreshold
+
+                        val beaconsToEmit = if (threshold != null) {
+                            lastScanBeacons.values.filter { it.rssi >= threshold }.toList()
+                        } else {
+                            lastScanBeacons.values.toList()
+                        }
+
                         lastScanBeacons.clear()
                         scanBeaconFlow.tryEmit(beaconsToEmit)
                     } catch (e: NoSuchElementException) {
@@ -141,7 +151,14 @@ internal class AndroidKmmScanner: KmmScanner {
             nonBeaconEmitJob = scope.launch {
                 while (true) {
                     try {
-                        val nonBeaconsToEmit = lastScanNonBeacons.values.toList()
+                        val threshold = rssiThreshold
+
+                        val nonBeaconsToEmit = if (threshold != null) {
+                            lastScanNonBeacons.values.filter { it.rssi >= threshold }.toList()
+                        } else {
+                            lastScanNonBeacons.values.toList()
+                        }
+
                         lastScanNonBeacons.clear()
                         scanNonBeaconFlow.tryEmit(nonBeaconsToEmit)
                         delay(currentScanPeriod + currentBetweenScanPeriod)
@@ -201,6 +218,10 @@ internal class AndroidKmmScanner: KmmScanner {
             clear()
             addAll(region.map { it.asAndroidRegion() })
         }
+    }
+
+    override fun setRssiThreshold(threshold: Int) {
+        rssiThreshold = threshold
     }
 
     override fun setIosRegions(regions: List<KScanRegion>) {

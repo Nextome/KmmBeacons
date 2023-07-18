@@ -53,6 +53,7 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
     private val scope = CoroutineScope(Dispatchers.Default + job)
 
     private var beaconEmitJob: Job? = null
+    var rssiThreshold: Int? = null
 
     init {
         locationManager.delegate = this
@@ -122,7 +123,14 @@ internal class IosScannerManager: NSObject(), CLLocationManagerDelegateProtocol 
             beaconEmitJob = scope.launch {
                 while (true) {
                     try {
-                        val beaconsToEmit = lastScanBeacons.values.toList()
+                        val threshold = rssiThreshold
+
+                        val beaconsToEmit = if (threshold != null) {
+                            lastScanBeacons.values.filter { it.rssi >= threshold }.toList()
+                        } else {
+                            lastScanBeacons.values.toList()
+                        }
+
                         lastScanBeacons.clear()
                         scanBeaconFlow.tryEmit(beaconsToEmit)
 

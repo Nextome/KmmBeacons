@@ -40,6 +40,10 @@ internal class IosKmmScanner: KmmScanner {
         return
     }
 
+    override fun setRssiThreshold(threshold: Int) {
+        iosScannerManager.rssiThreshold = threshold
+    }
+
     override fun observeErrors(): CFlow<Exception> {
         return iosScannerManager.observeErrors()
     }

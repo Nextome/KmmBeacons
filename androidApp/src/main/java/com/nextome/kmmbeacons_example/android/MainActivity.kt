@@ -23,20 +23,20 @@ class MainActivity : AppCompatActivity() {
                     Log.i("KmmBeacons", "Found ${it.size} beacons:")
 
                     it.forEach {
-                        Log.i("KmmBeacons", "Name ${it.bluetoothName}: ${it.uuid}, ${it.major}, ${it.minor}")
+                        Log.i("KmmBeacons", "Name ${it.bluetoothName}: ${it.uuid}, ${it.major}, ${it.minor} WITH RSSI ${it.rssi}")
                     }
                 }
             }
         }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.observeNonBeacons().collectLatest {
-                    Log.i("KmmBeacons", "Found ${it.size} non beacons with addresses:")
-                    Log.i("KmmBeacons", "${it.joinToString { "${it.deviceName}\n" }}")
-                }
-            }
-        }
+        // lifecycleScope.launch {
+        //     lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        //         viewModel.observeNonBeacons().collectLatest {
+        //             Log.i("KmmBeacons", "Found ${it.size} non beacons with addresses:")
+        //             Log.i("KmmBeacons", "${it.joinToString { "${it.deviceName}\n" }}")
+        //         }
+        //     }
+        // }
     }
 
     override fun onPause() {

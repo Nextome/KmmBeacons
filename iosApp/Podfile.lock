@@ -1,5 +1,5 @@
 PODS:
-  - kmmbeacons (1.2.1)
+  - kmmbeacons (1.2.2)
 
 DEPENDENCIES:
   - kmmbeacons (from `../kmmbeacons`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../kmmbeacons"
 
 SPEC CHECKSUMS:
-  kmmbeacons: 584510a60d83422ce2da51641a8dc2875f2170e6
+  kmmbeacons: 5773598dd478a5690812fa54610bb3c6aa853487
 
 PODFILE CHECKSUM: b1918865d9c9ead43b495f991cf1626e8ec6a784
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0
