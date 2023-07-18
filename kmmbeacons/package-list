@@ -9,10 +9,11 @@ $dokka.location:com.nextome.kmmbeacons.data/KScanProximity///PointingToDeclarati
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity/valueOf/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/value-of.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity/values/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/values.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRecord///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/index.html
-$dokka.location:com.nextome.kmmbeacons.data/KScanRecord/KScanRecord/#kotlin.String?#kotlin.String#kotlin.ByteArray/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/-k-scan-record.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanRecord/KScanRecord/#kotlin.String?#kotlin.String#kotlin.ByteArray#kotlin.Int/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/-k-scan-record.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRecord/deviceAddress/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/device-address.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRecord/deviceName/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/device-name.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRecord/rawBytes/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/raw-bytes.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanRecord/rssi/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/rssi.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRegion///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/index.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRegion/KScanRegion/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/-k-scan-region.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRegion/uuid/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-region/uuid.html
@@ -50,6 +51,7 @@ $dokka.location:com.nextome.kmmbeacons/KmmBeacons/observeResults/#/PointingToDec
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/setAndroidRegions/#kotlin.collections.List[com.nextome.kmmbeacons.data.KScanRegion]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-android-regions.html
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/setBetweenScanPeriod/#kotlin.Long/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-between-scan-period.html
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/setIosRegions/#kotlin.collections.List[com.nextome.kmmbeacons.data.KScanRegion]/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-ios-regions.html
+$dokka.location:com.nextome.kmmbeacons/KmmBeacons/setRssiThreshold/#kotlin.Int/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-rssi-threshold.html
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/setScanPeriod/#kotlin.Long/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/set-scan-period.html
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/startScan/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/start-scan.html
 $dokka.location:com.nextome.kmmbeacons/KmmBeacons/stopScan/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons/-kmm-beacons/stop-scan.html
