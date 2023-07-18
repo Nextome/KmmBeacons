@@ -1,5 +1,5 @@
 PODS:
-  - kmmbeacons (1.2.2)
+  - kmmbeacons (1.3.0)
 
 DEPENDENCIES:
   - kmmbeacons (from `../kmmbeacons`)
