@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -12,7 +14,7 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    android {
+    androidTarget {
         publishLibraryVariants("release")
         publishLibraryVariantsGroupedByFlavor = true
     }
@@ -85,8 +87,8 @@ android {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "11"
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 
