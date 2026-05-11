@@ -5,7 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     id("maven-publish")
     id("com.android.library")
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("org.jetbrains.dokka") version "2.2.0"
 }
 
 kotlin {

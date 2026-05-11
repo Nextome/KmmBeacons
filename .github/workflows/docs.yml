@@ -30,7 +30,7 @@ jobs:
       run: |
         VERSION=$(git tag --sort=committerdate | tail -1)
         echo Generating API documentation for version $VERSION
-        gradle :kmmbeacons:dokkaHtml
+        ./gradlew :kmmbeacons:dokkaHtml
     - name: Deploy API documentation to Github Pages
       if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
       uses: JamesIves/github-pages-deploy-action@v4
