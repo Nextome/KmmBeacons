@@ -6,6 +6,7 @@ $dokka.location:com.nextome.kmmbeacons.data/KScanProximity.IMMEDIATE///PointingT
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity.NEAR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-n-e-a-r/index.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity.UNKNOWN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/-u-n-k-n-o-w-n/index.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/index.html
+$dokka.location:com.nextome.kmmbeacons.data/KScanProximity/entries/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/entries.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity/valueOf/#kotlin.String/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/value-of.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanProximity/values/#/PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-proximity/values.html
 $dokka.location:com.nextome.kmmbeacons.data/KScanRecord///PointingToDeclaration/kmmbeacons/com.nextome.kmmbeacons.data/-k-scan-record/index.html
@@ -63,4 +64,3 @@ $dokka.location:com.nextome.kmmbeacons/KmmBeaconsInitializer/dependencies/#/Poin
 com.nextome.kmmbeacons
 com.nextome.kmmbeacons.data
 com.nextome.kmmbeacons.utils
-
