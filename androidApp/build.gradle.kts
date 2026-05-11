@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 35
+    namespace = "com.nextome.kmmbeacons_example.android"
     defaultConfig {
         applicationId = "com.nextome.kmmbeacons_example.android"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.8.0" apply false
+    kotlin("multiplatform") version "2.0.10" apply false
 }
 
 buildscript {
@@ -10,8 +10,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
-        classpath("com.android.tools.build:gradle:7.4.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.10")
+        classpath("com.android.tools.build:gradle:8.13.2")
     }
 }
 
@@ -22,7 +22,7 @@ allprojects {
     }
 
     group = "com.nextome.kmmbeacons"
-    val libraryVersion = "1.3.0"
+    val libraryVersion = "1.3.1"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: libraryVersion
 }
 

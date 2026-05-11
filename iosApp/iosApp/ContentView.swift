@@ -27,6 +27,7 @@ extension ContentView {
             regions.append(KScanRegion(uuid: "23A01AF0-232A-4518-9C0E-323FB773F5EF"))
             regions.append(KScanRegion(uuid: "4F0358E0-2EE7-11E4-8C21-0800200C9A66"))
             regions.append(KScanRegion(uuid: "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"))
+            regions.append(KScanRegion(uuid: "7777772E-6B6B-6D63-6E2E-636F6D000001"))
             
             scanner.setIosRegions(regions: regions)
         

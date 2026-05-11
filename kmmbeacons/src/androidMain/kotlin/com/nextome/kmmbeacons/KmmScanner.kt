@@ -4,7 +4,6 @@ package com.nextome.kmmbeacons
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
 import com.nextome.kmmbeacons.KScanResultParser.asKScanResult
 import com.nextome.kmmbeacons.data.KScanRecord
 import com.nextome.kmmbeacons.data.KScanRegion

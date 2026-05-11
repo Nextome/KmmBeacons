@@ -43,12 +43,11 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.altbeacon:android-beacon-library:2.19.6-beta3")
+                implementation("org.altbeacon:android-beacon-library:2.21.1")
                 implementation("androidx.startup:startup-runtime:1.1.1")
             }
         }
 
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -71,11 +70,12 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 35
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
+        namespace = "com.nextome.kmmbeacons"
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 36
     }
 
     compileOptions {

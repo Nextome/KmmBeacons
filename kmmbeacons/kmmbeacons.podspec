@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'kmmbeacons'
-    spec.version                  = '1.3.0'
+    spec.version                  = '1.3.1'
     spec.homepage                 = 'https://github.com/Nextome/KmmBeacons'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
@@ -8,8 +8,23 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Beacon scanner for KMM'
     spec.vendored_frameworks      = 'build/cocoapods/framework/kmmbeacons.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '14.1'
+    spec.ios.deployment_target    = '14.1'
                 
+                
+    if !Dir.exist?('build/cocoapods/framework/kmmbeacons.framework') || Dir.empty?('build/cocoapods/framework/kmmbeacons.framework')
+        raise "
+
+        Kotlin framework 'kmmbeacons' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :kmmbeacons:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
+                
+    spec.xcconfig = {
+        'ENABLE_USER_SCRIPT_SANDBOXING' => 'NO',
+    }
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':kmmbeacons',
