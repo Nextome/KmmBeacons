@@ -5,17 +5,7 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(
-                        org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-                    )
-                }
-            }
-        }
-    }
+    androidTarget()
     jvmToolchain(17)
     iosX64()
     iosArm64()
@@ -75,5 +65,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
